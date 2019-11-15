@@ -7,25 +7,31 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+     $dsn = "mysql:host=localhost;charset=utf8;dbname=invoice";
+     $pdo = new pdo($dsn,'root','');
+    ?>
     <div>
-        <td><a href="award.php?id=1">1~2月</a></td>
-        <td><a href="award.php?id=2">3~4月</a></td>
-        <td><a href="award.php?id=3">5~6月</a></td>
-        <td><a href="award.php?id=4">7~8月</a></td>
-        <td><a href="award.php?id=5">9~10月</a></td>
-        <td><a href="award.php?id=6">11~12月</a></td>
+        <td><a href="award.php?period=1">1~2月</a></td>
+        <td><a href="award.php?period=2">3~4月</a></td>
+        <td><a href="award.php?period=3">5~6月</a></td>
+        <td><a href="award.php?period=4">7~8月</a></td>
+        <td><a href="award.php?period=5">9~10月</a></td>
+        <td><a href="award.php?period=6">11~12月</a></td>
         <td><a href="./index.html">回首頁</a></td>
     </div>
-    
     <form action="./number_check.php" method="POST">
     <?php
-        $dsn = "mysql:host=localhost;charset=utf8;dbname=invoice";
-        $pdo = new pdo($dsn,'root','');
-        $sql = "SELECT `year`,`period`, `sp1`, `sp2`, `jackpot1`, `jackpot2`, `jackpot3`, `six1`, `six2`, `six3` FROM `award` WHERE 1";
-
-        $row = $pdo->query($sql)->fetchAll();
+        if(!empty($_GET['period'])){
+            $period = $_GET['period'];
+            $sql = "SELECT `year`,`period`, `sp1`, `sp2`, `jackpot1`, `jackpot2`, `jackpot3`, `six1`, `six2`, `six3` FROM `award` WHERE period='$period'";
+            $invoice = $pdo->query($sql)->fetch();
+        }else{
+            exit();
+        }
         
-        foreach($row as $invoice){
+       
+    
     ?>
     <table>
             <tr>
@@ -88,7 +94,7 @@
                 <td>200元</td>
             </tr>
             <?php
-            }
+            
             ?>
         </table>
     </form>
