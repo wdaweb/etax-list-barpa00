@@ -93,8 +93,26 @@
                     <?=$invoice['six3']?></td>
                 <td>200元</td>
             </tr>
-            <?php
             
+                <input type="hidden" name="year" value="<?=$invoice['year']?>">
+                <input type="hidden" name="period" value="<?=$_GET['period']?>">
+                <input type="hidden" name="sp1" value="<?=$invoice['sp1']?>">
+                <input type="hidden" name="sp2" value="<?=$invoice['sp2']?>">
+                <input type="hidden" name="jackpot1" value="<?=$invoice['jackpot1']?>">
+                <input type="hidden" name="jackpot2" value="<?=$invoice['jackpot2']?>">
+                <input type="hidden" name="jackpot3" value="<?=$invoice['jackpot3']?>">
+                <input type="hidden" name="six1" value="<?=$invoice['six1']?>">
+                <input type="hidden" name="six2" value="<?=$invoice['six2']?>">
+                <input type="hidden" name="six3" value="<?=$invoice['six3']?>">
+            
+            <?php
+                if(!empty($_GET['period'])){
+                    if(empty($invoice['six1'])){
+                        echo "<span>未開獎</span>";
+                    }else{
+                        echo "<input type='submit' value='開獎'>";
+                    }
+                }
             ?>
         </table>
     </form>
